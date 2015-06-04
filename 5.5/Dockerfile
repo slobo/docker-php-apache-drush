@@ -42,9 +42,8 @@ RUN  phpDeps='libxml2 \
   && php5enmod mcrypt mongo \
   && sed -i -e "s/variables_order.*/variables_order = \"EGPCS\"/g" /etc/php5/apache2/php.ini \
   && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-
-# Configure nginx root with sample app
-ADD sample/ /var/www/public
+  && composer global require drush/drush:~7.0.0@rc \
+  && ln -sf /root/.composer/vendor/bin/drush.php /usr/local/bin/drush 
 
 EXPOSE 80
 WORKDIR /app
