@@ -27,7 +27,7 @@ RUN  phpDeps='libxml2 \
               php5-mysql \
               php5-pgsql \
               php5-mcrypt \
-              php5-memcache \
+              php5-memcached \
               php5-curl \
               php5-json \
               php5-gd \
