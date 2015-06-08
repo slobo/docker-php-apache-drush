@@ -12,9 +12,10 @@
 # THIS:
 # - PHP Version 5.5
 # - Composer
+# - Drush
 
 FROM azukiapp/apache2
-MAINTAINER Azuki <support@azukiapp.com>
+MAINTAINER Slobodan Miskovic <slobodan@miskovic.ca>
 
 # Install PHP5 + Apache2 + Libs
 # Enable php and apache modules
@@ -26,6 +27,7 @@ RUN  phpDeps='libxml2 \
               php5-mysql \
               php5-pgsql \
               php5-mcrypt \
+              php5-memcache \
               php5-curl \
               php5-json \
               php5-gd \
@@ -33,13 +35,11 @@ RUN  phpDeps='libxml2 \
               php-apc' \
   && apt-get update -qq \
   && apt-get install -y -qq $phpDeps \
-  && pecl install mongo \
   && apt-get clean -qq \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
   && apt-get purge -y --auto-remove $buildDeps \
-  && echo "extension=mongo.so" > /etc/php5/mods-available/mongo.ini \
   && a2enmod rewrite \
-  && php5enmod mcrypt mongo \
+  && php5enmod mcrypt memcached \
   && sed -i -e "s/variables_order.*/variables_order = \"EGPCS\"/g" /etc/php5/apache2/php.ini \
   && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
   && composer global require drush/drush:~7.0.0@rc \
