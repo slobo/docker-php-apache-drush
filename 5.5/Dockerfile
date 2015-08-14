@@ -44,7 +44,7 @@ RUN  phpDeps='libxml2 \
   && sed -i -e "s/variables_order.*/variables_order = \"EGPCS\"/g" /etc/php5/apache2/php.ini \
   && sed -i -e "s/;opcache.memory_consumption.*/opcache.memory_consumption = 200/g" /etc/php5/apache2/php.ini \
   && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-  && composer global require drush/drush:~6.6.0@rc \
+  && composer global require drush/drush:~6.1.0@rc \
   && ln -sf /root/.composer/vendor/bin/drush.php /usr/local/bin/drush 
 
 EXPOSE 80
